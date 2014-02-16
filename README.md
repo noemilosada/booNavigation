@@ -119,14 +119,14 @@ $('#yourNavigationCustomId').booNavigation({
 
 **Options**
 
-```slideSpeed:``` 200 / 400 / 600 / 'slow' / 'fast'
-This will be the speed to open the drop down with a slide effect.
+```slideSpeed:``` 200 / 400 / 600 / 'slow' / 'fast'   
+This will be the speed to open the drop down with a slide effect.   
 The default option is 600.
-
-```fadeSpeed:``` 200 / 400 / 600 / 'slow' / 'fast'
-This will be the speed to display the drop down content with a fade effect.
+   
+```fadeSpeed:``` 200 / 400 / 600 / 'slow' / 'fast'   
+This will be the speed to display the drop down content with a fade effect.   
 The default option is 200.
-
-```delay:``` any numeric value
-This is a delay to avoid opening the drop down immediately when the user hovers the item.
+   
+```delay:``` any numeric value   
+This is a delay to avoid opening the drop down immediately when the user hovers the item.   
 The default option is 500.
