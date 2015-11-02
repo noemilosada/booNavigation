@@ -1,6 +1,6 @@
 /**
  * @name: booNavigation.js
- * @date:Sun 16 Feb 2014 
+ * @date: Sun 16 Feb 2014
  * @author: Noemi Losada Estrella <info@noemilosada.com>
  * Creative Commons License <http://creativecommons.org/licenses/by-sa/3.0/>
  */
@@ -61,19 +61,27 @@
         $(config.dropdown).hide();
 
         // Override default options with the custom ones
-        var options = $.extend(defaults, opts);
+        var options = $.extend({}, defaults, opts);
 
         // Save options for the current instance
         this.data(options);
 
-        $(config.item).each(function(i, e){
-            $(e).data('height', $(e).find(config.dropdown).height());
-            $(e).data('id', i);
-        });
+        this.each(function(i, e) {
+            var $e = $(e);
 
-        // Call to the menuSlide effects function
-        menuSlide(this.selector, options);
+            // Set initial data properties for each menu item
+            $e.find(config.item).each(function(index, element) {
+                var $el = $(element);
+
+                $el.data('height', $el.find(config.dropdown).height());
+                $el.data('id', index);
+            });
+
+            // Call to the menuSlide effects function
+            menuSlide($e, options);
+        });
     }
+
 
     /**
      * Animation to display and hide menuSlide
@@ -90,15 +98,16 @@
             timer;
 
         // Reset nav content on leave navigation
-        $(selector).on("mouseleave", function(e){
+        $(selector).on("mouseleave", function(e) {
             delayHappened = false;
             $(config.dropdown).slideUp(opts.slideSpeed);
         });
 
-        $(config.item).hover(function(e){
+        $(selector).find(config.item).hover(function(e) {
+
             // First time we are over an item
-            if (delayHappened == false) {
-                timer = setTimeout(function(){
+            if (delayHappened === false) {
+                timer = setTimeout(function() {
                     // Update delay and current item
                     delayHappened = true;
                     $currentItem = $(e.currentTarget);
@@ -109,8 +118,8 @@
                 }, opts.delay);
             } else {
                 // Changing between items
-                timer = setTimeout(function(){
-                    if ($(e.currentTarget).data('id') != $currentItem.data('id')) {
+                timer = setTimeout(function() {
+                    if ($(e.currentTarget).data('id') !== $currentItem.data('id')) {
                         // Update current and previous items
                         $previousItem = $currentItem;
                         $currentItem = $(e.currentTarget);
@@ -122,7 +131,7 @@
                         // Animate height to the current item and display current content
                         $previousItem.find(config.dropdown).animate({
                             height: $currentItem.data('height')
-                        }, opts.slideSpeed, function(){
+                        }, opts.slideSpeed, function() {
                             $currentItem.find(config.dropdown).height($currentItem.data('height'))
                                 .end().find(config.dropdownContent).hide()
                                 .end().find(config.dropdown).show();
@@ -137,7 +146,8 @@
                     }
                 }, config.itemsDelay);
             }
-        }, function(e){
+
+        }, function(e) {
             clearTimeout(timer);
         });
     }

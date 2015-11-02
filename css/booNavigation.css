@@ -93,3 +93,9 @@ a {
     background-color: #555;
     padding-left: 20px;
 }
+
+/** Navigation examples
+================================================== */
+.nav-example {
+    clear: left;
+}
